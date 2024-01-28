@@ -11,7 +11,8 @@ dotenv.config({ path: envPath });
 class AuthController {
     static async register(req, res, next) {
         const { username, email, password } = req.body;
-
+        let userExists = await User.find({ email: email });
+        if (userExists) return res.status(400).json({ message: 'User already exists.' });
         try {
             const hashedPassword = await bcrypt.hash(password, 10);
             const user = new User({ username, email, password: hashedPassword });

@@ -3,6 +3,6 @@ import getPriorities from "../controllers/prioritiesController.js";
 
 const priorityRouter = Router();
 
-priorityRouter.get('/priorities', getPriorities);
+priorityRouter.get('/getAllPriorities', getPriorities);
 
 export default priorityRouter;

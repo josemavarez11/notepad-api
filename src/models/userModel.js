@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-});
+}, { timestamps: true });
 
 userSchema.pre("save", async function(next) {
     const user = this;
@@ -38,6 +38,17 @@ userSchema.pre("save", async function(next) {
 userSchema.methods.comparePassword = async function (password) {
     let match = await bcrypt.compare(password, this.password);
     return match;
+}
+
+userSchema.methods.compareUsername = function (username) {
+    if (username === this.username) return true;
+    else return false;
+}
+
+userSchema.methods.compareEmail = async function (email) {
+    if (email === this.email) return true;
+    else return false;
+
 }
 
 const User = mongoose.model("User", userSchema);

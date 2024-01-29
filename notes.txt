@@ -2,3 +2,9 @@
 2. hay que usar el authMiddleware para verificar que el token siga vigente en cada operación de la app?
 3. hay que usar el sign de jwt cuando el usuario haga register?
 4. ver cómo hacer el logout.
+
+- devolver los ids de la categoria
+- arreglar bug de crear notas
+- terminar metodos del controlador de notas
+- usar try catch en el app
+- //verificar que la categoría especificada sea del usuario especificado.

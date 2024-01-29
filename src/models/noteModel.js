@@ -3,7 +3,13 @@ import mongoose from "mongoose";
 const noteSchema = new mongoose.Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
-        default: new mongoose.Types.ObjectId()
+        default: new mongoose.Types.ObjectId(),
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+        unique: false
     },
     title: {
         type: String,
@@ -19,7 +25,8 @@ const noteSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Priority",
         required: false,
-        unique: false
+        unique: false,
+        default: null
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
@@ -28,13 +35,7 @@ const noteSchema = new mongoose.Schema({
         unique: false,
         default: null
     },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-        unique: false
-    },
-});
+}, { timestamps: true });
 
 const Note = mongoose.model("Note", noteSchema);
 

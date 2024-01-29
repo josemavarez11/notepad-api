@@ -5,18 +5,18 @@ const categorySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         default: new mongoose.Types.ObjectId()
     },
-    name: {
-        type: String,
-        required: true,
-        unique: false
-    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
         unique: false
     },
-});
+    name: {
+        type: String,
+        required: true,
+        unique: false
+    },
+}, { timestamps: true });
 
 const Category = mongoose.model("Category", categorySchema);
 

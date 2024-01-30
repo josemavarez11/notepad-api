@@ -31,5 +31,5 @@ try {
     const PORT = process.env.SERVER_PORT
     app.listen(PORT, () => console.log(LOG_STYLES.SERVER_ON(`API started at http://localhost:${PORT}`)));
 } catch (error) {
-    return console.log(LOG_STYLES.SERVER_OFF(`API crashed: ${error.message}`));
+    console.log(LOG_STYLES.SERVER_OFF(`API crashed: ${error.message}`));
 }

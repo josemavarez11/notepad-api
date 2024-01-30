@@ -1,5 +1,7 @@
 import Note from '../models/noteModel.js';
 import User from '../models/userModel.js';
+import Category from '../models/categoryModel.js';
+import Priority from '../models/priorityModel.js';
 
 export const createNote = async (req, res) => {
     const { id, title, description } = req.body;
@@ -30,15 +32,27 @@ export const getNotes = async (req, res) => {
         if (!user) return res.status(404).json({ message: "User not found." });
 
         const notes = await Note.find({ user: id });
-        const formattedNotes = notes.map(note => {
+        if(!notes) return res.status(404).json({ message: "Notes not found." });
+
+        const formattedNotes = await Promise.all(notes.map(async note => {
+            const priority = note.priority ? await Priority.findById(note.priority) : null;
+            const category = note.category ? await Category.findById(note.category) : null;
+
             return {
                 id: note._id,
                 title: note.title,
                 description: note.description,
-                priority: note.priority,
-                category: note.category
-            }
-        });
+                priority: priority ? {
+                    id: priority._id,
+                    value: priority.value,
+                    description: priority.description
+                } : null,
+                category: category ? {
+                    id: category._id,
+                    name: category.name
+                } : null
+            };
+        }));
 
         res.status(200).json(formattedNotes);
     } catch (error) {
@@ -47,7 +61,23 @@ export const getNotes = async (req, res) => {
 }
 
 export const deleteNote = async (req, res) => {
+    const { id, noteID } = req.body;
 
+    if(!id) return res.status(400).json({ message: "User ID is required to delete a note." });
+    if(!noteID) return res.status(400).json({ message: "Note ID is required to delete note." });
+
+    try {
+        const user = await User.findById(id);
+        if (!user) return res.status(404).json({ message: "User not found." });
+
+        const note = await Note.findOne({ _id: noteID, user: id });
+        if(!note) return res.status(404).json({ message: "Note not found." });
+
+        await note.deleteOne();
+        res.status(200).json({ message: "Note deleted successfully." });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 }
 
 export const updateNoteTitle = async (req, res) => {
@@ -109,10 +139,8 @@ export const updateNoteCategory = async (req, res) => {
         const user = await User.findById(id);
         if (!user) return res.status(404).json({ message: "User not found." });
 
-        const note = await Note.findById(noteID);
+        const note = await Note.findOne({ _id: noteID, user: id });
         if(!note) return res.status(404).json({ message: "Note not found." });
-
-        //verificar que la categoría especificada sea del usuario especificado.
 
         if(note.category === newCategoryID) return res.status(400).json({ message: "New category is the same as the old one. No changes made." });
 
@@ -125,5 +153,24 @@ export const updateNoteCategory = async (req, res) => {
 }
 
 export const updateNotePriority = async (req, res) => {
+    const { id, noteID, newPriorityID } = req.body;
 
+    if(!id) return res.status(400).json({ message: "User ID is required to update a note priority." });
+    if(!noteID) return res.status(400).json({ message: "Note ID is required to update a note priority." });
+    if(!newPriorityID) return res.status(400).json({ message: "New category ID is required to update a note priority." });
+
+    try {
+        const user = await User.findById(id);
+        if (!user) return res.status(404).json({ message: "User not found." });
+
+        const note = await Note.findOne({ _id: noteID, user: id });
+        if(!note) return res.status(404).json({ message: "Note not found." });
+
+        if(note.priority === newPriorityID) return res.status(400).json({ message: "New priority is the same as the old one. No changes made." });
+        note.priority = newPriorityID;
+        await note.save();
+        res.status(200).json({ message: "Note priority updated successfully." });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 }

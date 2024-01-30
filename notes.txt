@@ -1,10 +1,7 @@
 1. cuando el usuario se cree una cuenta, automaticamente hará login y se meterá en la app?
-2. hay que usar el authMiddleware para verificar que el token siga vigente en cada operación de la app?
 3. hay que usar el sign de jwt cuando el usuario haga register?
 4. ver cómo hacer el logout.
 
-- devolver los ids de la categoria
+- implementar el authMiddleware para verificar el token en todas las operaciones de la app
 - arreglar bug de crear notas
-- terminar metodos del controlador de notas
 - usar try catch en el app
-- //verificar que la categoría especificada sea del usuario especificado.

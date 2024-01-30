@@ -32,8 +32,9 @@ export const getCategories = async (req, res) => {
         if (!user) return res.status(404).json({ message: "User not found." });
 
         const categories = await Category.find({ user: id });
-//junto con las categorias debería devolver los ids
-        const formattedCategories = categories.map(category => category.name);
+        const formattedCategories = categories.map(category => {
+            return { id: category._id, name: category.name };
+        });
 
         res.status(200).json(formattedCategories);
     } catch (error) {

@@ -4,15 +4,7 @@ import Priority from '../models/priorityModel.js';
 const getPriorities = async (req, res, next) => {
     try {
         const priorities = await Priority.find();
-        
-        const formattedPriorities = priorities.map(priority => {
-            return {
-                value: priority.value,
-                description: priority.description
-            };
-        });
-        
-        res.status(200).json(formattedPriorities);
+        return res.status(200).json(priorities);
     } catch (error) {
         next(error);
     }

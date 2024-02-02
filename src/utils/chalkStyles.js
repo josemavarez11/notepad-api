@@ -1,5 +1,6 @@
 import chalk from "chalk";
 
+//Style formats for messages on the server.
 const LOG_STYLES = Object.freeze({
     SERVER_ON: chalk.italic.magentaBright,
     SERVER_OFF: chalk.rgb(230, 14, 43),

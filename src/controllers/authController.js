@@ -1,13 +1,24 @@
+//External modules imports.
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
+
+//Internal modules imports.
 import getEnvPath from '../utils/getEnvPath.js';
 import LOG_STYLES from '../utils/chalkStyles.js';
 import User from '../models/userModel.js';
 
+//Load environment variables.
 const envPath = getEnvPath();
 dotenv.config({ path: envPath });
 
+/**
+ * @class
+ * @classdesc The controller for handling user authentication.
+ * @method register
+ * @method login
+ * @method logout
+ */
 class AuthController {
     static async register(req, res, next) {
         const { username, email, password } = req.body;

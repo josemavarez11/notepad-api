@@ -1,8 +1,15 @@
+//External module imports.
 import Note from '../models/noteModel.js';
 import User from '../models/userModel.js';
 import Category from '../models/categoryModel.js';
 import Priority from '../models/priorityModel.js';
 
+/**
+ * Function to create a new note.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
 export const createNote = async (req, res) => {
     const { id, title, description } = req.body;
 
@@ -22,6 +29,12 @@ export const createNote = async (req, res) => {
     }
 }
 
+/**
+ * Function to get all notes.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
 export const getNotes = async (req, res) => {
     const { id } = req.body;
 
@@ -60,6 +73,12 @@ export const getNotes = async (req, res) => {
     }
 }
 
+/**
+ * Function to delete a note.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
 export const deleteNote = async (req, res) => {
     const { id, noteID } = req.body;
 
@@ -80,6 +99,12 @@ export const deleteNote = async (req, res) => {
     }
 }
 
+/**
+ * Function to update a note title.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
 export const updateNoteTitle = async (req, res) => {
     const { id, noteID, newTitle } = req.body;
 
@@ -104,6 +129,12 @@ export const updateNoteTitle = async (req, res) => {
     }
 }
 
+/**
+ * Function to update a note description.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void} 
+ */
 export const updateNoteDescription = async (req, res) => {
     const { id, noteID, newDescription } = req.body;
 
@@ -128,6 +159,12 @@ export const updateNoteDescription = async (req, res) => {
     }
 }
 
+/**
+ * Function to update a note category.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
 export const updateNoteCategory = async (req, res) => {
     const { id, noteID, newCategoryID } = req.body;
 
@@ -152,6 +189,12 @@ export const updateNoteCategory = async (req, res) => {
     }
 }
 
+/**
+ * Function to update a note priority.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
 export const updateNotePriority = async (req, res) => {
     const { id, noteID, newPriorityID } = req.body;
 

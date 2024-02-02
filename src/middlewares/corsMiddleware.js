@@ -1,5 +1,12 @@
+//External module imports.
 import cors from 'cors'
 
+/**
+ * Middleware function to handle CORS (Cross-Origin Resource Sharing).
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
+ */
 const corsMiddleware = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');

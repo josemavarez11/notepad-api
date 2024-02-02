@@ -1,6 +1,12 @@
+//External module imports.
 import User from "../models/userModel.js";
 
-
+/**
+ * Function to delete a user.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
 export const deleteUser = async (req, res) => {
     const { id } = req.body;
 
@@ -14,6 +20,12 @@ export const deleteUser = async (req, res) => {
     }   
 }
 
+/**
+ * Function to update a user's password.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
 export const updatePassword = async (req, res) => {
     const { id, newPassword } = req.body;
 
@@ -36,6 +48,12 @@ export const updatePassword = async (req, res) => {
     }
 }
 
+/**
+ * Function to update a user's username.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
 export const updateUsername = async (req, res) => {
     const { id, newUsername } = req.body;
 
@@ -57,6 +75,12 @@ export const updateUsername = async (req, res) => {
     }
 }
 
+/**
+ * Function to update a user's email.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
 export const updateEmail = async (req, res) => {
     const { id, newEmail } = req.body;
 

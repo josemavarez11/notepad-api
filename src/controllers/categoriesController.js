@@ -1,6 +1,13 @@
+//External modules imports.
 import Category from "../models/categoryModel.js";
 import User from "../models/userModel.js";
 
+/**
+ * Function to create a new category.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
 export const createCategory = async (req, res) => {
     const { id, name } = req.body;
 
@@ -22,6 +29,12 @@ export const createCategory = async (req, res) => {
     }
 }
 
+/**
+ * Function to get all categories.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
 export const getCategories = async (req, res) => {
     const { id } = req.body;
 
@@ -42,6 +55,12 @@ export const getCategories = async (req, res) => {
     }
 }
 
+/**
+ * Function to update a category name.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
 export const updateCategoryName = async (req, res) => {
     const { id, oldName, newName } = req.body;
 
@@ -65,9 +84,14 @@ export const updateCategoryName = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-
 }
 
+/**
+ * Function to delete a category.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
 export const deleteCategory = async (req, res) => {
     const { id, name } = req.body;
 

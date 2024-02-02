@@ -1,7 +1,5 @@
 1. cuando el usuario se cree una cuenta, automaticamente hará login y se meterá en la app?
-3. hay que usar el sign de jwt cuando el usuario haga register?
-4. ver cómo hacer el logout.
+2. hay que usar el sign de jwt cuando el usuario haga register?
+3. ver cómo hacer el logout ??
 
 - implementar el authMiddleware para verificar el token en todas las operaciones de la app
-- arreglar bug de crear notas
-- usar try catch en el app

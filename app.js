@@ -9,11 +9,8 @@
  * Importing external modules.
  */
 import express from 'express';
-import dotenv from 'dotenv';
 
 // Importing custom functions and middlewares.
-import getEnvPath from './src/utils/getEnvPath.js';
-import LOG_STYLES from './src/utils/chalkStyles.js';
 import connectDB from './src/db/connectDB.js';
 import authRouter from './src/routing/authRouter.js';
 import userRouter from './src/routing/userRouter.js';
@@ -30,16 +27,6 @@ try {
      * @type {express.Application}
      */
     const app = express();
-
-    /**
-     * Environment variables file path.
-     * @const
-     * @type {string}
-     */
-    //const envPath = getEnvPath();
-
-    //Environment variables configuration.
-    //dotenv.config({ path: envPath });
     
     //Connect to MongoDB
     await connectDB();
@@ -69,7 +56,7 @@ try {
     const PORT = process.env.PORT
 
     // Start the server and show a message in the console.
-    app.listen(PORT, () => console.log(LOG_STYLES.SERVER_ON(`API started at http://localhost:${PORT}`)));
+    app.listen(PORT, () => console.log(`API started successfully!`));
 } catch (error) {
-    console.log(LOG_STYLES.SERVER_OFF(`API crashed: ${error.message}`));
+    console.log(`API crashed: ${error.message}`);
 }

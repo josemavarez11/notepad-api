@@ -1,16 +1,9 @@
 //External modules imports.
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import dotenv from 'dotenv';
 
 //Internal modules imports.
-import getEnvPath from '../utils/getEnvPath.js';
-import LOG_STYLES from '../utils/chalkStyles.js';
 import User from '../models/userModel.js';
-
-//Load environment variables.
-// const envPath = getEnvPath();
-// dotenv.config({ path: envPath });
 
 /**
  * @class
@@ -28,7 +21,7 @@ class AuthController {
             const hashedPassword = await bcrypt.hash(password, 10);
             const user = new User({ username, email, password: hashedPassword });
             await user.save();
-            console.log(LOG_STYLES.NEW_USER(`New user created: ${user}.`));
+            console.log(`New user created: ${user}.`);
             res.status(201).json({ message: "User created successfully." });
         } catch (error) {
             next(error);
@@ -46,7 +39,7 @@ class AuthController {
             if (!passwordMatch) return res.status(401).json({ message: 'Incorrect password.' });
 
             const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-            console.log(LOG_STYLES.LOGIN_USER(`User ${username} has logged in.`));
+            console.log(`User ${username} has logged in.`);
             return res.status(200).json({ token });
         } catch (error) {
             next(error);

@@ -36,10 +36,10 @@ try {
      * @const
      * @type {string}
      */
-    const envPath = getEnvPath();
+    //const envPath = getEnvPath();
 
     //Environment variables configuration.
-    dotenv.config({ path: envPath });
+    //dotenv.config({ path: envPath });
     
     //Connect to MongoDB
     await connectDB();
@@ -66,7 +66,7 @@ try {
      * @const
      * @type {number}
      */
-    const PORT = process.env.SERVER_PORT
+    const PORT = process.env.PORT
 
     // Start the server and show a message in the console.
     app.listen(PORT, () => console.log(LOG_STYLES.SERVER_ON(`API started at http://localhost:${PORT}`)));

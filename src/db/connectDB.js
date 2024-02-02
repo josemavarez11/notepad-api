@@ -6,8 +6,8 @@ import dotenv from 'dotenv';
 import getEnvPath from '../utils/getEnvPath.js';
 
 //Load environment variables.
-const envPath = getEnvPath();
-dotenv.config({ path: envPath });
+// const envPath = getEnvPath();
+// dotenv.config({ path: envPath });
 
 /**
  * Connects to MongoDB using the provided MONGODB_URI from the environment variables.

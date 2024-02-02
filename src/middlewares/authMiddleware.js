@@ -8,8 +8,8 @@ import LOG_STYLES from '../utils/chalkStyles.js';
 import User from '../models/userModel.js';
 
 //Load environment variables.
-const envPath = getEnvPath();
-dotenv.config({ path: envPath });
+// const envPath = getEnvPath();
+// dotenv.config({ path: envPath });
 
 /**
  * Middleware function to authenticate requests using JWT token.

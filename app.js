@@ -5,9 +5,7 @@
  * @author José Mavárez
  */ 
 
-/**
- * Importing external modules.
- */
+//Importing external modules.
 import express from 'express';
 
 // Importing custom functions and middlewares.

@@ -16,13 +16,13 @@ class AuthController {
     static async register(req, res, next) {
         const { username, email, password } = req.body;
         let userExists = await User.find({ email: email });
-        if (userExists) return res.status(400).json({ message: 'User already exists.' });
+        if (userExists > 0) return res.status(400).json({ message: 'User already exists.' });
         try {
             const hashedPassword = await bcrypt.hash(password, 10);
             const user = new User({ username, email, password: hashedPassword });
             await user.save();
             console.log(`New user created: ${user}.`);
-            res.status(201).json({ message: "User created successfully." });
+            res.status(201).json({ message: `User created successfully and logged in with this token: ${token}` });
         } catch (error) {
             next(error);
         }
@@ -48,13 +48,6 @@ class AuthController {
 
     static async logout(req, res, next) {
         return res.status(200).json({ message: 'Logout successful.' });
-        // try {
-        //     await AsyncStorage.removeItem('token');
-        //     console.log(LOG_STYLES.LOGOUT_USER('User has logged out.'));
-        //     return res.status(200).json({ message: 'Logout successful.' });
-        // } catch (error) {
-        //     next(error);
-        // }
     }  
 }
 

@@ -15,14 +15,16 @@ import User from '../models/userModel.js';
 class AuthController {
     static async register(req, res, next) {
         const { username, email, password } = req.body;
-        let userExists = await User.find({ email: email });
-        if (userExists > 0) return res.status(400).json({ message: 'User already exists.' });
+
         try {
-            const hashedPassword = await bcrypt.hash(password, 10);
-            const user = new User({ username, email, password: hashedPassword });
+            let userExists = await User.find({ email: email });
+            if (userExists.length > 0) return res.status(400).json({ message: 'User already exists.' });
+
+            const user = new User({ username, email, password });
             await user.save();
+
             console.log(`New user created: ${user}.`);
-            res.status(201).json({ message: `User created successfully and logged in with this token: ${token}` });
+            res.status(201).json({ message: `User created successfully!` });
         } catch (error) {
             next(error);
         }
@@ -39,6 +41,7 @@ class AuthController {
             if (!passwordMatch) return res.status(401).json({ message: 'Incorrect password.' });
 
             const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
             console.log(`User ${username} has logged in.`);
             return res.status(200).json({ token });
         } catch (error) {
@@ -46,7 +49,7 @@ class AuthController {
         }
     }
 
-    static async logout(req, res, next) {
+    static async logout(req, res) {
         return res.status(200).json({ message: 'Logout successful.' });
     }  
 }

@@ -1,6 +1,7 @@
 //External modules imports.
 import Category from "../models/categoryModel.js";
 import User from "../models/userModel.js";
+import Note from "../models/noteModel.js";
 
 /**
  * Function to create a new category.
@@ -104,6 +105,8 @@ export const deleteCategory = async (req, res) => {
 
         const category = await Category.findOne({ user: id, name: name });
         if(!category) return res.status(404).json({ message: "Category not found." });
+
+        await Note.deleteMany({ category: category._id });
 
         await category.deleteOne();
         res.status(200).json({ message: "Category deleted successfully." });

@@ -20,3 +20,8 @@
     "password": "ana.2712"
 }
 
+{
+    "username": "michaeljordan",
+    "password": "jordan.23"
+}
+

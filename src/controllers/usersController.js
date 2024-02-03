@@ -1,5 +1,7 @@
 //External module imports.
 import User from "../models/userModel.js";
+import Note from "../models/noteModel.js";
+import Category from "../models/categoryModel.js";
 
 /**
  * Function to delete a user.
@@ -13,6 +15,8 @@ export const deleteUser = async (req, res) => {
     if(!id) return res.status(400).json({ message: "Id is required to delete a user." });
 
     try {
+        await Note.deleteMany({ userId: id });
+        await Category.deleteMany({ userId: id });
         const user = await User.findByIdAndDelete(id);
         res.status(200).json(`User ${user.username} deleted successfully.`);
     } catch (error) {

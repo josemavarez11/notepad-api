@@ -36,7 +36,7 @@ export const createNote = async (req, res) => {
  * @returns {void}
  */
 export const getNotes = async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.params;
 
     if(!id) return res.status(400).json({ message: "User ID is required to get notes." });
 

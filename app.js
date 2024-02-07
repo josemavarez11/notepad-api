@@ -35,7 +35,7 @@ try {
     //Middleware to enable CORS.
     app.use(corsMiddleware);
 
-    // Authentication, users, priorities, categories and notes routes.
+    // Index router implementation.
     app.use('/', router);
     
     /**

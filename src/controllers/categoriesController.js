@@ -37,7 +37,7 @@ export const createCategory = async (req, res) => {
  * @returns {void}
  */
 export const getCategories = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.query;
 
     if(!id) return res.status(400).json({ message: "User ID is required to get categories." });
 

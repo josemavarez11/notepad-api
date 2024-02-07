@@ -9,7 +9,8 @@ import { Router } from "express";
 // Internal module import.
 import { 
     createNote, 
-    getNotes, 
+    getNotes,
+    getNotesByCategory, 
     deleteNote, 
     updateNoteCategory, 
     updateNoteDescription, 

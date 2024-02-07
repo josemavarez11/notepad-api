@@ -10,11 +10,7 @@ import express from 'express';
 
 // Importing custom functions and middlewares.
 import connectDB from './src/db/connectDB.js';
-import authRouter from './src/routing/authRouter.js';
-import userRouter from './src/routing/userRouter.js';
-import categoriesRouter from './src/routing/categoriesRouter.js';
-import priorityRouter from './src/routing/priorityRouter.js';
-import notesRouter from './src/routing/notesRouter.js';
+import router from './src/routing/index.js';
 import reqReceivedMiddleware from './src/middlewares/reqReceivedMiddleware.js';
 import corsMiddleware from './src/middlewares/corsMiddleware.js';
 
@@ -40,11 +36,7 @@ try {
     app.use(corsMiddleware);
 
     // Authentication, users, priorities, categories and notes routes.
-    app.use('/auth', authRouter);
-    app.use('/api/users', userRouter);
-    app.use('/api/priorities', priorityRouter);
-    app.use('/api/categories', categoriesRouter);
-    app.use('/api/notes', notesRouter);
+    app.use('/', router);
     
     /**
      * Port where the server will listen.

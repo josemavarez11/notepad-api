@@ -74,6 +74,47 @@ export const getNotes = async (req, res) => {
 }
 
 /**
+ * Function to get notes by category.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
+export const getNotesByCategory = async (req, res) => {
+    const { id, categoryID } = req.query;
+
+    if(!id) return res.status(400).json({ message: "User ID is required to get notes by category." });
+    if(!categoryID) return res.status(400).json({ message: "Category ID is required to get notes by category." });
+
+    try {
+        const user = await User.findById(id);
+        if (!user) return res.status(404).json({ message: "User not found." });
+
+        const category = await Category.findById(categoryID);
+        if (!category) return res.status(404).json({ message: "Category not found." });
+
+        const notes = await Note.find({ user: id, category: categoryID });
+
+        const formattedNotes = await Promise.all(notes.map(async note => {
+            const priority = note.priority ? await Priority.findById(note.priority) : null;
+            return {
+                id: note._id,
+                title: note.title,
+                description: note.description,
+                priority: priority ? {
+                    id: priority._id,
+                    value: priority.value,
+                    description: priority.description
+                } : null,
+            };
+        }))
+
+        res.status(200).json(formattedNotes);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+/**
  * Function to delete a note.
  * @param {*} req 
  * @param {*} res 

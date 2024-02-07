@@ -42,6 +42,15 @@ notesRouter.post('/createNote', createNote);
 notesRouter.get('/getAllNotes', getNotes);
 
 /**
+ * Route to get notes by category.
+ * It needs: id(user) and categoryID.
+ * @name get/getNotesByCategory
+ * @function
+ * @memberof module:notesRouter
+ */
+notesRouter.get('/getNotesByCategory', getNotesByCategory);
+
+/**
  * Route to delete a note.
  * It needs: id(user) and noteID.
  * @name delete/deleteNote

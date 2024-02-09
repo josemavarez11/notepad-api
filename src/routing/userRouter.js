@@ -34,7 +34,7 @@ userRouter.get('/profile', authenticate, (req, res) => res.status(201).json({
  * @function
  * @memberof module:userRouter
  */
-userRouter.put('/updatePassword', updatePassword);
+userRouter.put('/updatePassword', authenticate, updatePassword);
 
 /**
  * Route for updating user username.
@@ -43,7 +43,7 @@ userRouter.put('/updatePassword', updatePassword);
  * @function
  * @memberof module:userRouter
  */
-userRouter.put('/updateUsername', updateUsername);
+userRouter.put('/updateUsername', authenticate, updateUsername);
 
 /**
  * Route for updating user email.
@@ -52,7 +52,7 @@ userRouter.put('/updateUsername', updateUsername);
  * @function
  * @memberof module:userRouter
  */
-userRouter.put('/updateEmail', updateEmail);
+userRouter.put('/updateEmail', authenticate, updateEmail);
 
 /**
  * Route for deleting user.
@@ -61,6 +61,6 @@ userRouter.put('/updateEmail', updateEmail);
  * @function
  * @memberof module:userRouter
  */
-userRouter.delete('/delete', deleteUser);
+userRouter.delete('/delete', authenticate, deleteUser);
 
 export default userRouter;

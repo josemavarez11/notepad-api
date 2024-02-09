@@ -11,7 +11,8 @@ import Priority from '../models/priorityModel.js';
  * @returns {void}
  */
 export const createNote = async (req, res) => {
-    const { id, title, description } = req.body;
+    const id = req.user._id;
+    const { title, description } = req.body;
 
     if(!id) return res.status(400).json({ message: "User ID is required to create a new note." });
     if(!title) return res.status(400).json({ message: "Note title is required to create a new note." });
@@ -22,7 +23,7 @@ export const createNote = async (req, res) => {
         if (!user) return res.status(404).json({ message: "User not found." });
 
         const note = new Note({ user: id, title: title, description: description });
-        await note.save(); //aquí hay un bug
+        await note.save();
         return res.status(201).json({ message: "Note created successfully."})
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -36,7 +37,7 @@ export const createNote = async (req, res) => {
  * @returns {void}
  */
 export const getNotes = async (req, res) => {
-    const { id } = req.query;
+    const id = req.user._id;
 
     if(!id) return res.status(400).json({ message: "User ID is required to get notes." });
 
@@ -66,7 +67,6 @@ export const getNotes = async (req, res) => {
                 } : null
             };
         }));
-
         res.status(200).json(formattedNotes);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -80,7 +80,8 @@ export const getNotes = async (req, res) => {
  * @returns {void}
  */
 export const getNotesByCategory = async (req, res) => {
-    const { id, categoryID } = req.query;
+    const id = req.user._id;
+    const { categoryID } = req.query;
 
     if(!id) return res.status(400).json({ message: "User ID is required to get notes by category." });
     if(!categoryID) return res.status(400).json({ message: "Category ID is required to get notes by category." });
@@ -121,7 +122,8 @@ export const getNotesByCategory = async (req, res) => {
  * @returns {void}
  */
 export const deleteNote = async (req, res) => {
-    const { id, noteID } = req.body;
+    const id = req.user._id;
+    const { noteID } = req.body;
 
     if(!id) return res.status(400).json({ message: "User ID is required to delete a note." });
     if(!noteID) return res.status(400).json({ message: "Note ID is required to delete note." });
@@ -147,7 +149,8 @@ export const deleteNote = async (req, res) => {
  * @returns {void}
  */
 export const updateNoteTitle = async (req, res) => {
-    const { id, noteID, newTitle } = req.body;
+    const id = req.user._id;
+    const { noteID, newTitle } = req.body;
 
     if(!id) return res.status(400).json({ message: "User ID is required to update a note title." });
     if(!noteID) return res.status(400).json({ message: "Note ID is required to update a note title." });
@@ -177,7 +180,8 @@ export const updateNoteTitle = async (req, res) => {
  * @returns {void} 
  */
 export const updateNoteDescription = async (req, res) => {
-    const { id, noteID, newDescription } = req.body;
+    const id = req.user._id;
+    const { noteID, newDescription } = req.body;
 
     if(!id) return res.status(400).json({ message: "User ID is required to update a note description." });
     if(!noteID) return res.status(400).json({ message: "Note ID is required to update a note description." });
@@ -207,7 +211,8 @@ export const updateNoteDescription = async (req, res) => {
  * @returns {void}
  */
 export const updateNoteCategory = async (req, res) => {
-    const { id, noteID, newCategoryID } = req.body;
+    const id = req.user._id;
+    const { noteID, newCategoryID } = req.body;
 
     if(!id) return res.status(400).json({ message: "User ID is required to update a note category." });
     if(!noteID) return res.status(400).json({ message: "Note ID is required to update a note category." });
@@ -237,7 +242,8 @@ export const updateNoteCategory = async (req, res) => {
  * @returns {void}
  */
 export const updateNotePriority = async (req, res) => {
-    const { id, noteID, newPriorityID } = req.body;
+    const id = req.user._id;
+    const { noteID, newPriorityID } = req.body;
 
     if(!id) return res.status(400).json({ message: "User ID is required to update a note priority." });
     if(!noteID) return res.status(400).json({ message: "Note ID is required to update a note priority." });

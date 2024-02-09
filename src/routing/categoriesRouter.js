@@ -8,6 +8,7 @@ import { Router } from "express";
 
 // Internal module import.
 import { createCategory, getCategories, updateCategoryName, deleteCategory } from "../controllers/categoriesController.js";
+import authenticate from "../middlewares/authMiddleware.js";
 
 /**
  * Instance of the Express Router.
@@ -23,7 +24,7 @@ const categoriesRouter = Router();
  * @function
  * @memberof module:categoriesRouter
  */
-categoriesRouter.post("/createCategory", createCategory);
+categoriesRouter.post("/createCategory", authenticate, createCategory);
 
 /**
  * Route to get all categories.
@@ -31,7 +32,7 @@ categoriesRouter.post("/createCategory", createCategory);
  * @function
  * @memberof module:categoriesRouter
  */
-categoriesRouter.get("/getAllCategories", getCategories);
+categoriesRouter.get("/getAllCategories", authenticate, getCategories);
 
 /**
  * Route to update a category name.
@@ -40,7 +41,7 @@ categoriesRouter.get("/getAllCategories", getCategories);
  * @function
  * @memberof module:categoriesRouter
  */
-categoriesRouter.put("/updateCategoryName", updateCategoryName);
+categoriesRouter.put("/updateCategoryName", authenticate, updateCategoryName);
 
 /**
  * Route to delete a category.
@@ -49,6 +50,6 @@ categoriesRouter.put("/updateCategoryName", updateCategoryName);
  * @function
  * @memberof module:categoriesRouter
  */
-categoriesRouter.delete("/deleteCategory", deleteCategory);
+categoriesRouter.delete("/deleteCategory", authenticate, deleteCategory);
 
 export default categoriesRouter;

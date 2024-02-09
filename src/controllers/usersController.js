@@ -10,7 +10,7 @@ import Category from "../models/categoryModel.js";
  * @returns {void}
  */
 export const deleteUser = async (req, res) => {
-    const { id } = req.body;
+    const id = req.user._id;
 
     if(!id) return res.status(400).json({ message: "Id is required to delete a user." });
 
@@ -31,7 +31,8 @@ export const deleteUser = async (req, res) => {
  * @returns {void}
  */
 export const updatePassword = async (req, res) => {
-    const { id, newPassword } = req.body;
+    const id = req.user._id;
+    const { newPassword } = req.body;
 
     if(!id) return res.status(400).json({ message: "Id is required to update a user's password." });
     if(!newPassword) return res.status(400).json({ message: "New password is required to update a user's password." });
@@ -59,7 +60,8 @@ export const updatePassword = async (req, res) => {
  * @returns {void}
  */
 export const updateUsername = async (req, res) => {
-    const { id, newUsername } = req.body;
+    const id = req.user._id;
+    const { newUsername } = req.body;
 
     if(!id) return res.status(400).json({ message: "Id is required to update a user's username." });
     if(!newUsername) return res.status(400).json({ message: "New username is required to update a user's username." });
@@ -79,6 +81,7 @@ export const updateUsername = async (req, res) => {
     }
 }
 
+
 /**
  * Function to update a user's email.
  * @param {*} req 
@@ -86,7 +89,8 @@ export const updateUsername = async (req, res) => {
  * @returns {void}
  */
 export const updateEmail = async (req, res) => {
-    const { id, newEmail } = req.body;
+    const id = req.user._id;
+    const { newEmail } = req.body;
 
     if(!id) return res.status(400).json({ message: "Id is required to update a user's email." });
     if(!newEmail) return res.status(400).json({ message: "New email is required to update a user's email." });

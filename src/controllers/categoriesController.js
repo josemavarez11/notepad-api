@@ -10,7 +10,8 @@ import Note from "../models/noteModel.js";
  * @returns {void}
  */
 export const createCategory = async (req, res) => {
-    const { id, name } = req.body;
+    const id = req.user._id;
+    const { name } = req.body;
 
     if(!id) return res.status(400).json({ message: "User ID is required to create a new category." });
     if(!name) return res.status(400).json({ message: "Category name is required to create a new category." });
@@ -37,7 +38,7 @@ export const createCategory = async (req, res) => {
  * @returns {void}
  */
 export const getCategories = async (req, res) => {
-    const { id } = req.query;
+    const id = req.user._id;
 
     if(!id) return res.status(400).json({ message: "User ID is required to get categories." });
 
@@ -63,7 +64,8 @@ export const getCategories = async (req, res) => {
  * @returns {void}
  */
 export const updateCategoryName = async (req, res) => {
-    const { id, oldName, newName } = req.body;
+    const id = req.user._id;
+    const { oldName, newName } = req.body;
 
     if(!id) return res.status(400).json({ message: "User ID is required to update a category." });
     if(!oldName) return res.status(400).json({ message: "Old category name is required to update a category." });
@@ -94,7 +96,8 @@ export const updateCategoryName = async (req, res) => {
  * @returns {void}
  */
 export const deleteCategory = async (req, res) => {
-    const { id, name } = req.body;
+    const id = req.user._id;
+    const { name } = req.body;
 
     if(!id) return res.status(400).json({ message: "User ID is required to delete a category." });
     if(!name) return res.status(400).json({ message: "Category name is required to delete a category." });

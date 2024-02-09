@@ -17,6 +17,7 @@ import {
     updateNotePriority,
     updateNoteTitle
 } from "../controllers/notesController.js";
+import authenticate from "../middlewares/authMiddleware.js";
 
 /**
  * Instance of the Express Router.
@@ -32,7 +33,7 @@ const notesRouter = Router();
  * @function
  * @memberof module:notesRouter
  */
-notesRouter.post('/createNote', createNote);
+notesRouter.post('/createNote', authenticate, createNote);
 
 /**
  * Route to get all notes.
@@ -40,7 +41,7 @@ notesRouter.post('/createNote', createNote);
  * @function
  * @memberof module:notesRouter
  */
-notesRouter.get('/getAllNotes', getNotes);
+notesRouter.get('/getAllNotes', authenticate, getNotes);
 
 /**
  * Route to get notes by category.
@@ -49,7 +50,7 @@ notesRouter.get('/getAllNotes', getNotes);
  * @function
  * @memberof module:notesRouter
  */
-notesRouter.get('/getNotesByCategory', getNotesByCategory);
+notesRouter.get('/getNotesByCategory', authenticate, getNotesByCategory);
 
 /**
  * Route to delete a note.
@@ -58,7 +59,7 @@ notesRouter.get('/getNotesByCategory', getNotesByCategory);
  * @function
  * @memberof module:notesRouter
  */
-notesRouter.delete('/deleteNote', deleteNote);
+notesRouter.delete('/deleteNote', authenticate, deleteNote);
 
 /**
  * Route to update a note category.
@@ -67,7 +68,7 @@ notesRouter.delete('/deleteNote', deleteNote);
  * @function
  * @memberof module:notesRouter
  */
-notesRouter.put('/updateNoteCategory', updateNoteCategory);
+notesRouter.put('/updateNoteCategory', authenticate, updateNoteCategory);
 
 /**
  * Route to update a note description.
@@ -76,7 +77,7 @@ notesRouter.put('/updateNoteCategory', updateNoteCategory);
  * @function
  * @memberof module:notesRouter
  */
-notesRouter.put('/updateNoteDescription', updateNoteDescription);
+notesRouter.put('/updateNoteDescription', authenticate, updateNoteDescription);
 
 /**
  * Route to update a note priority.
@@ -85,7 +86,7 @@ notesRouter.put('/updateNoteDescription', updateNoteDescription);
  * @function
  * @memberof module:notesRouter
  */
-notesRouter.put('/updateNotePriority', updateNotePriority);
+notesRouter.put('/updateNotePriority', authenticate, updateNotePriority);
 
 /**
  * Route to update a note title.
@@ -94,6 +95,6 @@ notesRouter.put('/updateNotePriority', updateNotePriority);
  * @function
  * @memberof module:notesRouter
  */
-notesRouter.put('/updateNoteTitle', updateNoteTitle);
+notesRouter.put('/updateNoteTitle', authenticate, updateNoteTitle);
 
 export default notesRouter;

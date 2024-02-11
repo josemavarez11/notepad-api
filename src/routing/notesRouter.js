@@ -59,7 +59,7 @@ notesRouter.get('/getNotesByCategory', authenticate, getNotesByCategory);
  * @function
  * @memberof module:notesRouter
  */
-notesRouter.delete('/deleteNote', authenticate, deleteNote);
+notesRouter.delete('/deleteNote/:noteID', authenticate, deleteNote);
 
 /**
  * Route to update a note category.

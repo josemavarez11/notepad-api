@@ -79,10 +79,10 @@ export const updateCategoryName = async (req, res) => {
         if(!category) return res.status(404).json({ message: "Category not found." });
 
         if(category.name === newName) return res.status(400).json({ message: "Category name is the same. No changes made." });
-        
+
         category.name = newName;
         await category.save();
-        res.status(200).json({ message: "Category updated successfully." });
+        res.status(200).json({ message: "Category name updated successfully." });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

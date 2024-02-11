@@ -123,7 +123,8 @@ export const getNotesByCategory = async (req, res) => {
  */
 export const deleteNote = async (req, res) => {
     const id = req.user._id;
-    const { noteID } = req.body;
+    //const { noteID } = req.body;
+    const noteID = req.params.noteID;
 
     if(!id) return res.status(400).json({ message: "User ID is required to delete a note." });
     if(!noteID) return res.status(400).json({ message: "Note ID is required to delete note." });

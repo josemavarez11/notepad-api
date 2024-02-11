@@ -65,22 +65,21 @@ export const getCategories = async (req, res) => {
  */
 export const updateCategoryName = async (req, res) => {
     const id = req.user._id;
-    const { oldName, newName } = req.body;
+    const { categoryID, newName } = req.body;
 
     if(!id) return res.status(400).json({ message: "User ID is required to update a category." });
-    if(!oldName) return res.status(400).json({ message: "Old category name is required to update a category." });
+    if(!categoryID) return res.status(400).json({ message: "Category ID is required to update a category." });
     if(!newName) return res.status(400).json({ message: "New category name is required to update a category." });
 
     try {
         const user = await User.findById(id);
         if (!user) return res.status(404).json({ message: "User not found." });
 
-        const category = await Category.findOne({ user: id, name: oldName });
+        const category = await Category.findOne({ user: id, _id: categoryID });
         if(!category) return res.status(404).json({ message: "Category not found." });
 
-        const categoryMatch = await Category.findOne({ user: id, name: newName });
-        if(categoryMatch) return res.status(400).json({ message: "Category already exists. No changes made." });
-
+        if(category.name === newName) return res.status(400).json({ message: "Category name is the same. No changes made." });
+        
         category.name = newName;
         await category.save();
         res.status(200).json({ message: "Category updated successfully." });

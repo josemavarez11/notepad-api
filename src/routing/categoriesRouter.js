@@ -50,6 +50,6 @@ categoriesRouter.put("/updateCategoryName", authenticate, updateCategoryName);
  * @function
  * @memberof module:categoriesRouter
  */
-categoriesRouter.delete("/deleteCategory", authenticate, deleteCategory);
+categoriesRouter.delete("/deleteCategory/:categoryID", authenticate, deleteCategory);
 
 export default categoriesRouter;

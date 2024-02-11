@@ -96,22 +96,17 @@ export const updateCategoryName = async (req, res) => {
  */
 export const deleteCategory = async (req, res) => {
     const id = req.user._id;
-    //const { name } = req.body; //borrar la categoria segun el id y no segun el name
     const { categoryID } = req.params;
 
     if(!id) return res.status(400).json({ message: "User ID is required to delete a category." });
-    //if(!name) return res.status(400).json({ message: "Category name is required to delete a category." });
     if(!categoryID) return res.status(400).json({ message: "Category ID is required to delete a category." });
 
     try {
         const user = await User.findById(id);
         if (!user) return res.status(404).json({ message: "User not found." });
 
-        //const category = await Category.findOne({ user: id, name: name });
         const category = await Category.findOne({ user: id, _id: categoryID });
         if(!category) return res.status(404).json({ message: "Category not found." });
-
-        //await Note.deleteMany({ category: category._id });
 
         await category.deleteOne();
         res.status(200).json({ message: "Category deleted successfully." });

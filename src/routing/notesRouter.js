@@ -10,7 +10,8 @@ import { Router } from "express";
 import { 
     createNote, 
     getNotes,
-    getNotesByCategory, 
+    getNotesByCategory,
+    getNotesByPriority,
     deleteNote, 
     updateNoteCategory, 
     updateNoteDescription, 
@@ -51,6 +52,15 @@ notesRouter.get('/getAllNotes', authenticate, getNotes);
  * @memberof module:notesRouter
  */
 notesRouter.get('/getNotesByCategory', authenticate, getNotesByCategory);
+
+/**
+ * Route to get notes by priority.
+ * It needs: id(user) and priorityID.
+ * @name get/getNotesByPriority
+ * @function
+ * @memberof module:notesRouter
+ */
+notesRouter.get('/getNotesByPriority', authenticate, getNotesByPriority);
 
 /**
  * Route to delete a note.

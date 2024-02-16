@@ -107,7 +107,42 @@ export const getNotesByCategory = async (req, res) => {
                     description: priority.description
                 } : null,
             };
-        }))
+        }));
+
+        res.status(200).json(formattedNotes);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+/**
+ * Function to get notes by priority.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {void}
+ */
+export const getNotesByPriority = async (req, res) => {
+    const id = req.user._id;
+    const { priorityID } = req.query;
+
+    if(!id) return res.status(400).json({ message: "User ID is required to get notes by category." });
+    if(!priorityID) return res.status(400).json({ message: "Priority id is required to get notes by priority." });
+
+    try {
+        const notes = await Note.find({ user: id, priority: priorityID });
+
+        const formattedNotes = await Promise.all(notes.map(async note => {
+            const category = note.category ? await Category.findById(note.category) : null;
+            return {
+                id: note._id,
+                title: note.title,
+                description: note.description,
+                category: category ? {
+                    id: category._id,
+                    name: category.name
+                } : null,
+            };
+        }));
 
         res.status(200).json(formattedNotes);
     } catch (error) {
